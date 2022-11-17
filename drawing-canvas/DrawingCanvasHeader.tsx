@@ -16,9 +16,7 @@ export default function DrawingCanvasHeader() {
         const img = canvasRef.current?.makeImageSnapshot();
         const bytes = img.encodeToBase64();
 
-        //console.log('image', img)
-
-        //MediaLibrary.saveToLibraryAsync(bytes);
+        // Don't explicitly need permission for this! 
         const filename = FileSystem.documentDirectory + "MySketch.jpg";
         FileSystem.writeAsStringAsync(filename, bytes, {
             encoding: FileSystem.EncodingType.Base64
