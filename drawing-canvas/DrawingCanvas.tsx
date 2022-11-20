@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler'; // The first library we will need!
-import { Canvas, Path, useCanvasRef } from "@shopify/react-native-skia"; // Second library we need! a 2D Graphics Engine
+import {Canvas, Path, useCanvasRef, useImage, Image} from "@shopify/react-native-skia"; // Second library we need! a 2D Graphics Engine
 import {CanvasContext} from "../Contexts/CanvasContext";
 
 interface IPath {
@@ -10,7 +10,7 @@ interface IPath {
     color?: string; // color is optional
 }
 
-export default function DrawingCanvas() {
+export default function DrawingCanvas(props: any) {
     const [paths, setPaths] = useState<IPath[]>([]);
 
     const { setCanvasRef } = useContext(CanvasContext);
@@ -41,13 +41,32 @@ export default function DrawingCanvas() {
     })
     .minDistance(1);
 
-
+    // TODO: Clean this up.
+    let image = null;
+    if (props.isTrails) {
+        image = useImage(require("../moca/assets/Trails.png"));
+    }
 
   return (
           <GestureHandlerRootView style={{ flex: 1}}>
               <GestureDetector gesture={pan}>
-                <View style={styles.container}>
+                <View style={{
+                    flex: 1,
+                    backgroundColor: '#fff',
+                    borderWidth: props.borderWidth
+                }}>
                     <Canvas style={{ flex: 1 }} ref={ref}>
+
+                      {image && (
+                        <Image
+                          image={image}
+                          fit="contain"
+                          x={0}
+                          y={0}
+                          width={348}
+                          height={311}
+                        />
+                        )}
                         {paths.map((p, index) => (
                                 <Path
                                     key={index}
@@ -63,11 +82,12 @@ export default function DrawingCanvas() {
               </GestureDetector>
           </GestureHandlerRootView>
   )
+
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
 });

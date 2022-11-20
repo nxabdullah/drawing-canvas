@@ -7,6 +7,7 @@ import {CanvasContext} from "../Contexts/CanvasContext";
 import * as MediaLibrary from 'expo-media-library';
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
+import { Icon } from '@rneui/themed';
 
 export default function DrawingCanvasHeader() {
 
@@ -30,11 +31,32 @@ export default function DrawingCanvasHeader() {
 
     return (
 
-            <View style={styles.headerView}>
 
-                <Button
-                    title="Save Image"
+            <View style={styles.headerView}>
+                <View style={{flex: 4}}></View>
+                <Icon
+                    reverse
+                    name='ios-pencil'
+                    type="ionicon"
+                    color='skyblue'
+                    style={styles.iconStyle}
+                />
+
+                <Icon
+                    reverse
+                    name='ios-reload'
+                    type="ionicon"
+                    color='silver'
+                    style={styles.iconStyle}
+                />
+
+                <Icon
+                    reverse
+                    name='ios-save'
+                    type="ionicon"
+                    color='silver'
                     onPress={() => saveImage()}
+                    style={styles.iconStyle}
                 />
 
             </View>
@@ -45,7 +67,14 @@ export default function DrawingCanvasHeader() {
 const styles = StyleSheet.create({
     headerView: {
         flex: 1,
-        backgroundColor: '#eee',
-        maxHeight: 100
+        backgroundColor: '#fff',
+        maxHeight: 100,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
+    iconStyle: {
+        width: 50,
+        height: 50
+    }
 });

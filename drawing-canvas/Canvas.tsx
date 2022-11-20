@@ -7,7 +7,7 @@ import { CanvasContext } from '../Contexts/CanvasContext';
 
 
 
-export default function Canvas() {
+export default function Canvas(props: any) {
 
     const [canvasRef, setCanvasRef] = useState(false);
 
@@ -15,7 +15,8 @@ export default function Canvas() {
             <SafeAreaView style={{flex: 1, backgroundColor: '#eee'}}>
                 <CanvasContext.Provider value={{canvasRef, setCanvasRef}} >
                     <DrawingCanvasHeader />
-                    <DrawingCanvas />
+                    {props.isTrails && (<DrawingCanvas isTrails={true} borderWidth={0}/>) }
+                    {!props.isTrails && (<DrawingCanvas borderWidth={2}/>) }
                 </CanvasContext.Provider>
             </SafeAreaView>
             );

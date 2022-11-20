@@ -8,7 +8,7 @@ export default function MocaHeader() {
 
     return (
             <View style={styles.container}>
-                <Canvas />
+                <Canvas isTrails={true}/>
             </View>
             )
 }

@@ -3,13 +3,12 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
 
-export default function MocaHeader() {
-
+export default function MocaHeader(props: any) {
 
     return (
             <View style={styles.container}>
                 <View style={styles.leftHeader}>
-                    <Text style={styles.leftHeaderText}>VISUOSPATIAL/EXECUTIVE - TRAILS</Text>
+                    <Text style={styles.leftHeaderText}>{props.title}</Text>
                 </View>
                 <View style={styles.rightHeader}>
                     <Text style={styles.rightHeaderText}>00:00</Text>
